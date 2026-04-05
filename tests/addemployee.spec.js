@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { faker } from '@faker-js/faker';
+// import { faker } from '@faker-js/faker';
 
-import empdata from "../testdata/addemployee.json"
+import empdata from "../Test_Data/data.json"
 
 
 test('Verify User can create Employee', async ({ page }) => {
@@ -43,12 +43,13 @@ test('Verify User can create Employee', async ({ page }) => {
     //Employee ID enter 
 
     //await page.locator("(//label[normalize-space(text())='Employee Id']/following::input)[1]").fill("2345")
-    await page.locator("(//label[normalize-space(text())='Employee Id']/following::input)[1]").fill(faker.string.alphanumeric(5))
+    //await page.locator("(//label[normalize-space(text())='Employee Id']/following::input)[1]").fill(faker.string.alphanumeric(5))
 
     // click on save button 
     await page.locator("//button[@type='submit']").click()
 
     // Wheter Personal detals is visible or not   // assertions with in 5 sec if not vissible 
-    await  expect(page.locator("//h6[text()='Personal Details']")).toBeVisible()
+    await expect(page.locator("//h6[text()='Personal Details']")).toHaveText("Personal Details")
+    await page.waitForTimeout(2000)
 
 })
